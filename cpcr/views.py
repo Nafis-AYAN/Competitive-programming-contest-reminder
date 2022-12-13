@@ -22,21 +22,26 @@ def homepage(request):
     # for contest in response['result']:
     #     contest["start_time"] = make_aware(datetime.fromtimestamp(contest["startTimeSeconds"]))
     
-
-    response = pip._vendor.requests.get('https://kontests.net/api/v1/all').json()
+    response = pip._vendor.requests.get('https://kontests.net/api/v1/all').json()   #getting API
     
     context = {
         "data": response,
     }
     return render(request,'home.html', context=context)
 
+
+
 @login_required(login_url='login')
 def contactus(request):
     return render(request,'contact.html')
 
+
+
 @login_required(login_url='login')
 def profile(request):
     return render(request,'profile.html')
+
+
 
 def signuppage(request):
     form = CreateUserForm()
@@ -51,6 +56,7 @@ def signuppage(request):
 
     context = {'form' : form}
     return render(request,'signup.html',context)
+
 
 
 def loginpage(request):
@@ -68,6 +74,7 @@ def loginpage(request):
             messages.info(request,'Username or password is incorrect' )
     
     return render(request,'login.html')
+
 
 
 def logoutUser(request):
